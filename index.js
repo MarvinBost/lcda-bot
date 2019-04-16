@@ -16,8 +16,8 @@ client.on('message', msg => {
     }
     if (msg.channel == purg) {
         if (msg.content === 'LCDA') {
-            msg.author.addRole(val);
-            msg.author.removeRole(noval);
+            msg.member.addRole(val);
+            msg.member.removeRole(noval);
         }
         if (msg.content === 'lu et approuvé') {
             msg.reply("Veux-tu des lunettes ? https://lcda.marvinbost.fr/rules.html");
