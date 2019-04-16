@@ -3,14 +3,14 @@ const client = new Discord.Client();
 
 
 client.on('ready', () => {
-    client.user.setActivity("ping");
+    client.user.setActivity("!help for commands");
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('message', msg => {
-    const purg = msg.guild.channels.find(ch => ch.name === 'le-purgatoire');
-    const val = msg.guild.roles.find('Clients');
-    const noval = msg.guild.roles.find('Ames Errantes');
+    const purg = msg.guild.channels.find('name', 'le-purgatoire');
+    const val = msg.guild.roles.find('name', 'Clients');
+    const noval = msg.guild.roles.find('name', 'Ames Errantes');
     if (msg.content === 'ping') {
         msg.reply('Pong!');
     }
