@@ -1,15 +1,44 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const val = message.guild.roles.find('name', 'Clients');
+const noval = message.guild.roles.find('name', 'Ames Errantes');
+const purg = client.channels.find('le-purgatoire');
 
 client.on('ready', () => {
     client.user.setGame("!help for commands");
-  console.log(`Logged in as ${client.user.tag}!`);
+    console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('Pong!');
-  }
+    if (msg.content === 'ping') {
+        msg.reply('Pong!');
+    }
+    if (msg.channel == purg) {
+        if (msg.content === 'LCDA') {
+            msg.author.addRole(val);
+            msg.author.removeRole(noval);
+        }
+        if (msg.content === 'lu et approuvé') {
+            msg.reply("Veux-tu des lunettes ? https://lcda.marvinbost.fr/rules.html");
+        }
+        if (msg.content === 'lu et accepté') {
+            msg.reply("Tiens le lien tu peux lire les règles ? https://lcda.marvinbost.fr/rules.html");
+        }
+        if (msg.content === 'lu et accepté') {
+            msg.reply("Est-ce que tu le fais exprès ou tu as juste étais bercée trop prés du mur ? https://lcda.marvinbost.fr/rules.html");
+        }
+    }
+});
+
+client.on('guildMemberAdd', member => {
+    const channel = member.guild.channels.find(ch => ch.name === 'le-purgatoire');
+    if (!channel) return;
+    member.addRole(noval);
+    channel.send(`Bienvenue ${member} ! pour être sûr que tout le monde lit bien les règles, et qu’ils les respectent vous devrez entrer une phrase qui sera inscrite dans les règles qui nous certifiera que vous les avez lus et accepté.\n Les règles : https://lcda.marvinbost.fr/rules.html`);
+});
+
+client.on('guildMemberRemove', (member) => {
+    client.channels.find('ardoise-public').send(`**${member.username}** est parti du serveur..... Bye Bye`);
 });
 
 client.login(process.env.TOKEN);
