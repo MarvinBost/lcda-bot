@@ -40,7 +40,7 @@ client.on('guildMemberAdd', member => {
 });
 
 client.on('guildMemberRemove', (member) => {
-    member.guild.channels.find('name', 'ardoise-public').send(`**${member.username}** est parti du serveur..... Bye Bye`);
+    member.guild.channels.find('name', 'ardoise-public').send(`**${member.user}** est parti du serveur..... Bye Bye`);
 });
 
 client.login(process.env.TOKEN);
