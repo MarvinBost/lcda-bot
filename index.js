@@ -33,6 +33,7 @@ client.on('message', msg => {
 
 client.on('guildMemberAdd', member => {
     const channel = member.guild.channels.find('name', 'le-purgatoire');
+    const noval = member.guild.roles.find('name', 'Ames Errantes');
     if (!channel) return;
     member.addRole(noval);
     channel.send(`Bienvenue ${member} ! pour être sûr que tout le monde lit bien les règles, et qu’ils les respectent vous devrez entrer une phrase qui sera inscrite dans les règles qui nous certifiera que vous les avez lus et accepté.\n Les règles : https://lcda.marvinbost.fr/rules.html`);
