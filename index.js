@@ -32,14 +32,14 @@ client.on('message', msg => {
 });
 
 client.on('guildMemberAdd', member => {
-    const channel = member.guild.channels.find(ch => ch.name === 'le-purgatoire');
+    const channel = member.guild.channels.find('name', 'le-purgatoire');
     if (!channel) return;
     member.addRole(noval);
     channel.send(`Bienvenue ${member} ! pour être sûr que tout le monde lit bien les règles, et qu’ils les respectent vous devrez entrer une phrase qui sera inscrite dans les règles qui nous certifiera que vous les avez lus et accepté.\n Les règles : https://lcda.marvinbost.fr/rules.html`);
 });
 
 client.on('guildMemberRemove', (member) => {
-    client.channels.find('ardoise-public').send(`**${member.username}** est parti du serveur..... Bye Bye`);
+    member.guild.channels.find('name', 'ardoise-public').send(`**${member.username}** est parti du serveur..... Bye Bye`);
 });
 
 client.login(process.env.TOKEN);
