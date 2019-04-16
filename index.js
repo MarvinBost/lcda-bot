@@ -9,10 +9,22 @@ client.on('ready', () => {
 
 client.on('message', msg => {
     const purg = msg.guild.channels.find('name', 'le-purgatoire');
+    const gen = msg.guild.channels.find('name', 'ardoise-public');
     const val = msg.guild.roles.find('name', 'Clients');
     const noval = msg.guild.roles.find('name', 'Ames Errantes');
     if (msg.content === 'ping') {
         msg.reply('Pong!');
+    }
+    if (msg.channel == gen){
+        if (msg.content === '!discord') {
+            msg.reply('Vous pouvez invitez vos amis avec ce lien : \n https://discord.gg/KaUQJpU');
+        }
+        if (msg.content === '!youtube') {
+            msg.reply('La chaine du comptoire : \nhttps://www.youtube.com/channel/UCPFaB1cT8ZiC_K8WmqNJfXA?view_as=public');
+        }
+        if (msg.content === 'ping') {
+            msg.reply('Pong!');
+        }
     }
     if (msg.channel == purg) {
         if (msg.content === 'LCDA') {
@@ -25,7 +37,7 @@ client.on('message', msg => {
         if (msg.content === 'lu et accepté') {
             msg.reply("Tiens le lien tu peux lire les règles ? https://lcda.marvinbost.fr/rules.html");
         }
-        if (msg.content === 'lu et accepté') {
+        if (msg.content === 'accepté') {
             msg.reply("Est-ce que tu le fais exprès ou tu as juste étais bercée trop prés du mur ? https://lcda.marvinbost.fr/rules.html");
         }
     }
