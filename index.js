@@ -1,8 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const val = message.guild.roles.find('name', 'Clients');
-const noval = message.guild.roles.find('name', 'Ames Errantes');
-const purg = client.channels.find('le-purgatoire');
+
 
 client.on('ready', () => {
     client.user.setGame("!help for commands");
@@ -10,6 +8,9 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+    const purg = client.channels.find('le-purgatoire');
+    const val = message.guild.roles.find('Clients');
+    const noval = message.guild.roles.find('Ames Errantes');
     if (msg.content === 'ping') {
         msg.reply('Pong!');
     }
