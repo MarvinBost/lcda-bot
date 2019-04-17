@@ -12,18 +12,12 @@ client.on('message', msg => {
     const gen = msg.guild.channels.find('name', 'ardoise-public');
     const val = msg.guild.roles.find('name', 'Clients');
     const noval = msg.guild.roles.find('name', 'Ames Errantes');
-    if (msg.content === 'ping') {
-        msg.reply('Pong!');
-    }
     if (msg.channel == gen){
         if (msg.content === '!discord') {
             msg.reply('Vous pouvez invitez vos amis avec ce lien : \n https://discord.gg/KaUQJpU');
         }
         if (msg.content === '!youtube') {
             msg.reply('La chaine du comptoire : \nhttps://www.youtube.com/channel/UCPFaB1cT8ZiC_K8WmqNJfXA?view_as=public');
-        }
-        if (msg.content === 'ping') {
-            msg.reply('Pong!');
         }
     }
     if (msg.channel == purg) {
