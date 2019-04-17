@@ -3,7 +3,7 @@ const client = new Discord.Client();
 
 
 client.on('ready', () => {
-    client.user.setActivity("Make with 🖤 & ☕ by Max Zander");
+    client.user.setActivity("Make with 💗 & ☕ by Max Zander");
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
