@@ -80,7 +80,11 @@ client.on('message', msg => {
                 });
         }
     }
-    if (msg.content === '!purge' && msg.author.hasPermission('KICK_MEMBERS')) {
+    if (msg.content === '!purge') {
+        if(!msg.channel.permissionsFor(msg.author).hasPermission('KICK_MEMBERS')){
+            console.log("l'utilisateur :" + msg.author.displayName + "a essayer de faire une purge mais n'as pas la permission");
+            return
+        }
         let list = msg.guild.roles.find(roles => roles.name === 'Clients').members;
         list.map(member => member.removeRole(val));
         list.map(member => member.addRole(noval));
