@@ -19,6 +19,7 @@ function del(msg, nb) {
 client.on('message', msg => {
     const purg = msg.guild.channels.find(channels => channels.name === 'le-purgatoire');
     const gen = msg.guild.channels.find(channels => channels.name === 'ardoise-public');
+    const log = msg.guild.channels.find(channels => channels.name === 'salle-reseaux');
     const val = msg.guild.roles.find(roles => roles.name === 'Clients');
     const noval = msg.guild.roles.find(roles => roles.name === 'Ames Errantes');
 
@@ -37,16 +38,17 @@ client.on('message', msg => {
         }
     }
     if (msg.channel == purg) {
-        if (msg.content === 'LCDA') {
+        if (msg.content === 'Topsy Kretts' || msg.content === 'topsy kretts' ) {
             del(msg, 2);
             msg.member.addRole(val);
+            log.send(`${msg.member.displayName} a accepté les règles !`);
             msg.member.removeRole(noval);
 
         }
-        if (msg.content === 'lu et approuvé') {
+        if (msg.content === 'LCDA') {
             msg.reply("Veux-tu des lunettes ? https://lcda.marvinbost.fr/rules.html");
         }
-        if (msg.content === 'lu et accepté') {
+        if (msg.content === 'lu et accepter') {
             msg.reply("Tiens le lien tu peux lire les règles ? https://lcda.marvinbost.fr/rules.html");
         }
         if (msg.content === 'accepté') {
