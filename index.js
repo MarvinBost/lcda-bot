@@ -93,8 +93,8 @@ client.on('message', msg => {
         list.map(member => member.addRole(noval));
         console.log("Une purge a été faite");
     }
-    if (message.content.startsWith("!lcda")) {
-    var usr = message.content.substr(6);
+    if (msg.content.startsWith("!lcda")) {
+    var usr = msg.content.substr(6);
     let id;
     https.get(
         `https://r6tab.com/api/search.php?platform=uplay&search=${usr}`,
@@ -142,7 +142,7 @@ client.on('message', msg => {
                                     "Bot LCDA creer par Max Zander",
                                     "https://raw.githubusercontent.com/MarvinBost/LCDA/master/media/LCDA.ico"
                                 );
-                            message.channel.send(exampleEmbed);
+                            msg.channel.send(exampleEmbed);
                         });
                         resp.on("error", err => {
                             console.log("Error: " + err.message);
