@@ -95,7 +95,6 @@ client.on('message', msg => {
     }
     if (message.content.startsWith("!lcda")) {
     var usr = message.content.substr(6);
-    let id;
     https.get(
       `https://r6.apitab.com/search/uplay/${usr}`,
       resp => {
@@ -105,26 +104,27 @@ client.on('message', msg => {
         });
         resp.on("end", () => {
           json = JSON.parse(data);
+          console.log(json.players[Object.keys(json.players)].profile.p_name);
           const exampleEmbed = new Discord.RichEmbed()
             .setColor("#2ecc71")
-            .setTitle(`${json[Object.keys(rep.players)].profile.p_name}} Stats`)
-            .setURL("https://r6tab.com/player/${json[Object.keys(rep.players)].profile.p_user}")
+            .setTitle(`${json.players[Object.keys(json.players)].profile.p_name} Stats`)
+            .setURL(`https://r6tab.com/player/${json.players[Object.keys(json.players)].profile.p_user}`)
             .setAuthor(
               `LCDA R6Stats`,
-              `http://ubisoft-avatars.akamaized.net/${json[Object.keys(rep.players)].profile.p_user}/default_256_256.png`,
-              `https://r6tab.com/player/${json[Object.keys(rep.players)].profile.p_user}`
+              `http://ubisoft-avatars.akamaized.net/${json.players[Object.keys(json.players)].profile.p_user}/default_256_256.png`,
+              `https://r6tab.com/player/${json.players[Object.keys(json.players)].profile.p_user}`
             )
             .setDescription("Statistiques des ranked de cette saison")
             .setThumbnail(
-              `https://cdn.tab.one/r6/images/ranks/?rank=${json[Object.keys(rep.players)].ranked.rank}&champ=0`
+              `https://cdn.tab.one/r6/images/ranks/?rank=${json.players[Object.keys(json.players)].ranked.rank}&champ=0`
             )
-            .addField("MMR actuel", `${json[Object.keys(rep.players)].ranked.mmr}`)
+            .addField("MMR actuel", `${json.players[Object.keys(json.players)].ranked.mmr}`)
             .addBlankField()
             .addField("Wins", `bientôt de nouveau disponible`, true)
             .addField("Losses", `bientôt de nouveau disponible`, true)
             .addField("Kills", `bientôt de nouveau disponible`, true)
             .addField("Deaths", `bientôt de nouveau disponible`, true)
-            .addField("Seasonal K/D", `${json[Object.keys(rep.players)].ranked.kd}`, true)
+            .addField("Seasonal K/D", `${json.players[Object.keys(json.players)].ranked.kd}`, true)
             .addBlankField()
             .setTimestamp()
             .setFooter(
