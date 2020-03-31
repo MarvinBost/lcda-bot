@@ -93,7 +93,7 @@ client.on('message', msg => {
         list.map(member => member.addRole(noval));
         console.log("Une purge a été faite");
     }
-    if (message.content.startsWith("!lcda")) {
+    if (msg.content.startsWith("!lcda")) {
     var usr = message.content.substr(6);
     https.get(
       `https://r6.apitab.com/search/uplay/${usr}`,
