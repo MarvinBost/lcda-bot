@@ -93,70 +93,56 @@ client.on('message', msg => {
         list.map(member => member.addRole(noval));
         console.log("Une purge a été faite");
     }
-    if (msg.content.startsWith("!lcda")) {
-    var usr = msg.content.substr(6);
+    if (message.content.startsWith("!lcda")) {
+    var usr = message.content.substr(6);
     let id;
     https.get(
-        `https://r6tab.com/api/search.php?platform=uplay&search=${usr}`,
-        resp => {
-            let data = "";
-            resp.on("data", chunk => {
-                data += chunk;
-            });
-            resp.on("end", () => {
-                json = JSON.parse(data);
-                if (json.totalresults > 0) {
-                    https.get(`https://r6tab.com/api/player.php?p_id=${json.results[0].p_id}`, resp => {
-                        let data = "";
-                        resp.on("data", chunk => {
-                            data += chunk;
-                        });
-                        resp.on("end", () => {
-                            let json = JSON.parse(data);
-                            let sKD = Math.round((json.seasonal.total_rankedkills / json.seasonal.total_rankeddeaths) * 100) / 100
-                            const exampleEmbed = new Discord.RichEmbed()
-                                .setColor("#2ecc71")
-                                .setTitle(`${json.p_name} Stats`)
-                                .setURL("https://lcda.marvinbost.fr")
-                                .setAuthor(
-                                    `LCDA R6Stats`,
-                                    `http://ubisoft-avatars.akamaized.net/${
-          json.p_id
-        }/default_256_256.png`,
-                                    `https://lcda.marvinbost.fr`
-                                )
-                                .setDescription("Statistiques des ranked de cette saison")
-                                .setThumbnail(
-                                    `https://r6tab.com/images/pngranks/${json.p_currentrank}.png`
-                                )
-                                .addField("MMR actuel", `${json.p_currentmmr} (${json.seasonal.last_EU_mmrchange})`)
-                                .addBlankField()
-                                .addField("Wins", `${json.seasonal.total_rankedwins}`, true)
-                                .addField("Losses", `${json.seasonal.total_rankedlosses}`, true)
-                                .addField("Kills", `${json.seasonal.total_rankedkills}`, true)
-                                .addField("Deaths", `${json.seasonal.total_rankeddeaths}`, true)
-                                .addField("Seasonal K/D", `${sKD}`, true)
-                                .addBlankField()
-                                .setTimestamp()
-                                .setFooter(
-                                    "Bot LCDA creer par Max Zander",
-                                    "https://raw.githubusercontent.com/MarvinBost/LCDA/master/media/LCDA.ico"
-                                );
-                            msg.channel.send(exampleEmbed);
-                        });
-                        resp.on("error", err => {
-                            console.log("Error: " + err.message);
-                        });
-                    });
-                }
-            });
-            resp.on("error", err => {
-                console.log("Error: " + err.message);
-            });
-        }
+      `https://r6.apitab.com/search/uplay/${usr}`,
+      resp => {
+        let data = "";
+        resp.on("data", chunk => {
+          data += chunk;
+        });
+        resp.on("end", () => {
+          json = JSON.parse(data);
+          const exampleEmbed = new Discord.RichEmbed()
+            .setColor("#2ecc71")
+            .setTitle(`${json[Object.keys(rep.players)].profile.p_name}} Stats`)
+            .setURL("https://r6tab.com/player/${json[Object.keys(rep.players)].profile.p_user}")
+            .setAuthor(
+              `LCDA R6Stats`,
+              `http://ubisoft-avatars.akamaized.net/${json[Object.keys(rep.players)].profile.p_user}/default_256_256.png`,
+              `https://r6tab.com/player/${json[Object.keys(rep.players)].profile.p_user}`
+            )
+            .setDescription("Statistiques des ranked de cette saison")
+            .setThumbnail(
+              `https://cdn.tab.one/r6/images/ranks/?rank=${json[Object.keys(rep.players)].ranked.rank}&champ=0`
+            )
+            .addField("MMR actuel", `${json[Object.keys(rep.players)].ranked.mmr}`)
+            .addBlankField()
+            .addField("Wins", `bientôt de nouveau disponible`, true)
+            .addField("Losses", `bientôt de nouveau disponible`, true)
+            .addField("Kills", `bientôt de nouveau disponible`, true)
+            .addField("Deaths", `bientôt de nouveau disponible`, true)
+            .addField("Seasonal K/D", `${json[Object.keys(rep.players)].ranked.kd}`, true)
+            .addBlankField()
+            .setTimestamp()
+            .setFooter(
+              "Bot LCDA creer par Max Zander",
+              "https://raw.githubusercontent.com/MarvinBost/LCDA/master/media/LCDA.ico"
+            );
+          message.channel.send(exampleEmbed);
+          resp.on("error", err => {
+            console.log("Error: " + err.message);
+          });
+        });
+        resp.on("error", err => {
+          console.log("Error: " + err.message);
+        });
+      }
     );
 
-}
+  }
 });
 
 client.on('guildMemberAdd', member => {
