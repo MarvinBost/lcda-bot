@@ -94,7 +94,7 @@ client.on('message', msg => {
         console.log("Une purge a été faite");
     }
     if (msg.content.startsWith("!lcda")) {
-    var usr = message.content.substr(6);
+    var usr = msg.content.substr(6);
     https.get(
       `https://r6.apitab.com/search/uplay/${usr}`,
       resp => {
