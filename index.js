@@ -131,7 +131,7 @@ client.on('message', msg => {
               "Bot LCDA creer par Max Zander",
               "https://raw.githubusercontent.com/MarvinBost/LCDA/master/media/LCDA.ico"
             );
-          message.channel.send(exampleEmbed);
+          msg.channel.send(exampleEmbed);
           resp.on("error", err => {
             console.log("Error: " + err.message);
           });
