@@ -45,7 +45,7 @@ client.on('message', msg => {
             } catch (err) {
                 msg.reply(err)
             }
-            msg.reply('le resultat est : ' + (parseInt(args[1]) + parseInt(args[3])))
+            msg.reply('le resultat est : ' + (parseInt(args[1]) * parseInt(args[3])))
             msg.delete();
         }
     }
